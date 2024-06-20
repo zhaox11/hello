@@ -69,4 +69,20 @@ clean:
 .PHONY: test
 test:
 	@echo "run test"
+	go version
 	go test -v ./test
+
+.PHONY: create-pipeline
+create-pipeline:
+	@echo "create pipeline"
+	curl -X POST http://powerservice.datadomain.com/jenkins/job/dev/job/UoM/job/Santorini/job/zhaox11/createItem?name=remote1      --user zhaox11:119ac05fa3bd417bc3b107462de62d6724     --header "Content-Type: application/xml" --data-binary @../pipeline-config.xml
+
+.PHONY: build-pipeline
+build-pipeline:
+	@echo "build pipeline"
+	curl -X POST http://powerservice.datadomain.com/jenkins/job/dev/job/UoM/job/Santorini/job/zhaox11/job/remote1/build --user zhaox11:119ac05fa3bd417bc3b107462de62d6724
+
+.PHONY: delete-pipeline
+delete-pipeline:
+	@echo "delete pipeline"
+	curl -X DELETE http://powerservice.datadomain.com/jenkins/job/dev/job/UoM/job/Santorini/job/zhaox11/job/remote1/ --user zhaox11:119ac05fa3bd417bc3b107462de62d6724
