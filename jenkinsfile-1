@@ -1,25 +1,28 @@
 pipeline {
-  agent any
-  stages {
-    stage('Build1') {
-      steps {
-        echo 'Building...'
-      }
-    }
-    stage('Test2') {
-      steps {
-        echo 'Testing...'
-	testExitCode = sh(script: 'make test', returnStatus: true)
-        if (testExitCode != 0) {
-		currentBuild.result = 'FAILURE'
-		throw new Exception("Build stage failed, check logs")
+    agent any
+    stages {
+        stage('Build1') {
+            steps {
+                echo 'Building...'
+                checkout scm
+            }
         }
-      }
+        stage('Test2') {
+            steps {
+                script {
+                    echo 'Testing...'
+                    testExitCode = sh(script: 'make test', returnStatus: true)
+                    if (testExitCode != 0) {
+                        currentBuild.result = 'FAILURE'
+                        throw new Exception('Build stage failed, check logs')
+                    }
+                }
+            }
+        }
+        stage('Deploy3') {
+            steps {
+                echo 'Deploying...'
+            }
+        }
     }
-    stage('Deploy3') {
-      steps {
-        echo 'Deploying...'
-      }
-    }
-  }
 }
