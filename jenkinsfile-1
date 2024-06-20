@@ -9,6 +9,11 @@ pipeline {
     stage('Test2') {
       steps {
         echo 'Testing...'
+	testExitCode = sh(script: 'make test', returnStatus: true)
+        if (testExitCode != 0) {
+		currentBuild.result = 'FAILURE'
+		throw new Exception("Build stage failed, check logs")
+        }
       }
     }
     stage('Deploy3') {

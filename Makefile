@@ -65,3 +65,8 @@ build:
 .PHONY: clean
 clean:
 	rm -rf $(HELLO_SRCTOP)/build.out
+
+.PHONY: test
+test:
+	@echo "run test"
+	go test -v ./test
