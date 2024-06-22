@@ -10,6 +10,6 @@ jobs:
   jobs1:
     runs-on: ubuntu-latest
     steps:
-      -run: echo "give it a try"
-      -run: echo "on the actions"
-      -run: echo "in eos2git"
+      - run: echo "give it a try"
+      - run: echo "on the actions"
+      - run: echo "in eos2git"
