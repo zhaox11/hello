@@ -1,7 +1,5 @@
 name: first ci try
-on:
-  push
-  pull_request
+on:[push,pull_request]
 jobs:
   jobs1:
     runs-on: ubuntu-latest
