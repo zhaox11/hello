@@ -13,3 +13,15 @@ jobs:
       - run: echo "give it a try"
       - run: echo "on the actions"
       - run: echo "in eos2git"
+      - name: CHeck out repository code
+        uses: actions/checkout@v2
+      - name: Setup GO
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.21
+      - name: Run linting
+        run: |
+          go fmt ./...
+          go vet ./...
+      - name: Run tests
+        run: go test -v ./...
